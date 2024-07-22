@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./@/*"]
     },
 
     /* Bundler mode */
@@ -27,5 +27,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/*", "@/components/*"]
+
+  "include": ["src", "@/components/ui/*"]
 }
