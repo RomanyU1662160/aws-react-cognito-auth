@@ -3,6 +3,8 @@ import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/auth/Login';
 import LayoutPage from './pages/Layout';
 import ContactUsPage from './pages/contact/ContactPage';
+import SignupForm from './components/auth/Signup';
+import SignupConfirmation from './components/auth/Confirmation';
 
 const home: RouteObject = {
   id: 'root',
@@ -14,12 +16,20 @@ const home: RouteObject = {
       Component: HomePage,
     },
     {
+      path: 'contact',
+      Component: ContactUsPage,
+    },
+    {
       path: 'login',
       Component: LoginPage,
     },
     {
-      path: 'contact',
-      Component: ContactUsPage,
+      path: 'signup',
+      Component: SignupForm,
+    },
+    {
+      path: 'confirmation',
+      element: typeof SignupConfirmation,
     },
   ],
 };

@@ -13,8 +13,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { signIn } from 'aws-amplify/auth';
-import { useNavigate } from 'react-router-dom';
+import { signUp } from 'aws-amplify/auth';
+import SignupConfirmation from './Confirmation';
+
+type SignUpResult = {
+  nextStep: 'DONE' | 'CONFIRM_SIGN_UP' | 'COMPLETE_AUTO_SIGN_IN';
+  userId: string | undefined;
+  isSignUpComplete: boolean;
+};
 
 const formSchema = z
   .object({
@@ -25,10 +31,10 @@ const formSchema = z
   })
   .required();
 
-function LoginForm() {
+function SignupForm() {
   const [errors, setErrors] = useState<[string]>();
+  const [signupResult, setSignupResult] = useState<SignUpResult>();
 
-  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,25 +55,36 @@ function LoginForm() {
       return;
     }
     try {
-      const result = await signIn({ username: email, password });
-      console.log('result::>>', result);
-      if (result.isSignedIn) {
-        navigate('/');
-      }
+      const result = await signUp({ username: email, password });
+      const { nextStep, userId, isSignUpComplete } = result;
+      setSignupResult({
+        nextStep: nextStep.signUpStep,
+        userId,
+        isSignUpComplete,
+      });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log('error:::>>>', error);
+      console.log('error.message:::>>>', error.message);
       setErrors([error.message]);
     }
   }
 
+  /// show confirmation form if the user submitted the signup form and the result returns to confirm the user's account
+  if (
+    signupResult?.userId &&
+    !signupResult.isSignUpComplete &&
+    signupResult.nextStep === 'CONFIRM_SIGN_UP'
+  ) {
+    return <SignupConfirmation userId={signupResult.userId} />;
+  }
   return (
     <div className='grid grid-cols-4'>
       <div className='col-span-2 col-start-2'>
+        <h1 className='text-center font-bold'>Signup</h1>
         {errors?.map((errorText, I) => {
           return (
             <p key={I} className='text-center text-red-800'>
-              {errorText ?? null}
+              {errorText}
             </p>
           );
         })}
@@ -113,4 +130,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SignupForm;

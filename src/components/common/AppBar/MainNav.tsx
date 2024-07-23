@@ -12,10 +12,36 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { signOut } from 'aws-amplify/auth';
 
 const pages = ['Products', 'Pricing', 'Contact'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+  {
+    title: 'Profile',
+    action: {
+      onclick: () => Navigate({ to: '/', replace: true }),
+    },
+  },
+  {
+    title: 'Account',
+    action: {
+      onclick: () => Navigate({ to: '/' }),
+    },
+  },
+  {
+    title: 'Dashboard',
+    action: {
+      onclick: () => Navigate({ to: '/' }),
+    },
+  },
+  {
+    title: 'Logout',
+    action: {
+      onclick: async () => signOut(),
+    },
+  },
+];
 
 function MainNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -155,8 +181,10 @@ function MainNavBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                  <button onClick={setting.action.onclick}>
+                    <Typography textAlign='center'>{setting.title}</Typography>
+                  </button>
                 </MenuItem>
               ))}
             </Menu>
@@ -170,9 +198,11 @@ function MainNavBar() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Typography textAlign='center' className='bg-dark'>
-              Logout
-            </Typography>
+            <Link to='/signup'>
+              <Typography textAlign='center' className='bg-dark'>
+                Signup
+              </Typography>
+            </Link>
           </MenuItem>
         </Toolbar>
       </Container>
