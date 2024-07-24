@@ -80,7 +80,7 @@ function LoginForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='shadcn' {...field} />
+                    <Input placeholder='Your email' {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -96,7 +96,11 @@ function LoginForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type='password' placeholder='password' {...field} />
+                    <Input
+                      type='password'
+                      placeholder='Your password'
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.

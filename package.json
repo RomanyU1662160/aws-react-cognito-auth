@@ -9,8 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "npm run build && npm run preview"
- 
+    "start": "npm run build && npm run preview",
+    "codegen": "npx playwright codegen http://localhost:5173/"
   },
   "homepage": "https://romanyu1662160.github.io/aws-react-cognito-auth",
   "dependencies": {
