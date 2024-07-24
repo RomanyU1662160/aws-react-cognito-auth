@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { createHashRouter, RouteObject } from 'react-router-dom';
 import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/auth/Login';
 import LayoutPage from './pages/Layout';
@@ -39,6 +39,6 @@ const ContactUs: RouteObject = {
   errorElement: '<div>error</div>',
 };
 
-const router = createBrowserRouter([home, ContactUs]);
+const router = createHashRouter([home, ContactUs]);
 
 export default router;

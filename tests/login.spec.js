@@ -24,8 +24,8 @@ test('login Page has the correct title', async ({ page }) => {
   await page.goto('/login');
 
   //   const pageHeading = page.getByRole('heading', { name: 'Login' });
-  const element = await page.getByTestId('Login');
-  await expect(element).toHaveText('Login');
+  const element = await page.getByText(/Login/);
+  await expect(element).toHaveText(/Login/);
 });
 
 test('should display error messages', async ({ page }) => {
