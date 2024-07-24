@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Form,
   FormControl,
@@ -32,8 +32,8 @@ const formSchema = z
   .required();
 
 function SignupForm() {
-  const [errors, setErrors] = useState<[string]>();
-  const [signupResult, setSignupResult] = useState<SignUpResult>();
+  const [errors, setErrors] = React.useState<[string]>();
+  const [signupResult, setSignupResult] = React.useState<SignUpResult>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Form,
   FormControl,
@@ -29,7 +29,7 @@ type SignupConfirmationProps = {
 };
 
 function SignupConfirmation({ userId }: SignupConfirmationProps) {
-  const [errors, setErrors] = useState<[string]>();
+  const [errors, setErrors] = React.useState<[string]>();
 
   const navigate = useNavigate();
 
