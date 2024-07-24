@@ -3,6 +3,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import process from 'process';
 
+const baseURL = 'https://aws-react-cognito-auth.vercel.app/#/';
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -12,6 +14,7 @@ import process from 'process';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -27,7 +30,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://aws-react-cognito-auth.vercel.app/',
+    baseURL: baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
