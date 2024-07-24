@@ -97,7 +97,7 @@ function SignupForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='shadcn' {...field} />
+                    <Input placeholder='Add your email' {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -113,7 +113,11 @@ function SignupForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type='password' placeholder='password' {...field} />
+                    <Input
+                      type='Add your password'
+                      placeholder='password'
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.

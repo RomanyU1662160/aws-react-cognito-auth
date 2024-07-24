@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { BasePage } from './basePage';
+import { BasePage } from './home';
 
 export class LoginPage extends BasePage {
   private readonly emailInput: Locator;
@@ -22,8 +22,30 @@ export class LoginPage extends BasePage {
   }
 
   async assertFEErrMsg() {
+    await this.gotToLogin();
     await this.submitEmptyLoginForm();
     await expect(this.emailErrMsg).toBeVisible();
     await expect(this.passwordErrMsg).toBeVisible();
+  }
+
+  async fillLoginForm({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
+    await this.gotToLogin();
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+  }
+
+  async submitLoginForm() {
+    await this.submitButton.click();
+  }
+
+  async gotToLogin() {
+    await this.page.goto('/');
+    await this.loginLink.click();
   }
 }

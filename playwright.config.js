@@ -4,6 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
 import process from 'process';
 
 const baseURL = 'https://aws-react-cognito-auth.vercel.app/#/';
+// const baseURL = 'http://localhost:5173/#';
 
 /**
  * Read environment variables from file.
@@ -16,7 +17,7 @@ const baseURL = 'https://aws-react-cognito-auth.vercel.app/#/';
  */
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
